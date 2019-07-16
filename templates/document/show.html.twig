@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Document{% endblock %}
+
+{% block body %}
+    <h1>Document</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ document.id }}</td>
+            </tr>
+            <tr>
+                <th>Subject</th>
+                <td>{{ document.subject }}</td>
+            </tr>
+            <tr>
+                <th>Body</th>
+                <td>{{ document.body }}</td>
+            </tr>
+            <tr>
+                <th>YearCreated</th>
+                <td>{{ document.yearCreated }}</td>
+            </tr>
+            <tr>
+                <th>MonthCreated</th>
+                <td>{{ document.monthCreated }}</td>
+            </tr>
+            <tr>
+                <th>DayCreated</th>
+                <td>{{ document.dayCreated }}</td>
+            </tr>
+            <tr>
+                <th>DateCreated</th>
+                <td>{{ document.dateCreated ? document.dateCreated|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateModified</th>
+                <td>{{ document.dateModified ? document.dateModified|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>CreatedBy</th>
+                <td>{{ document.createdBy }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedBy</th>
+                <td>{{ document.updatedBy }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('document_index') }}">back to list</a>
+
+    <a href="{{ path('document_edit', {'id': document.id}) }}">edit</a>
+
+    {{ include('document/_delete_form.html.twig') }}
+{% endblock %}

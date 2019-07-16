@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Document index{% endblock %}
+
+{% block body %}
+    <h1>Document index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Subject</th>
+                <th>Body</th>
+                <th>YearCreated</th>
+                <th>MonthCreated</th>
+                <th>DayCreated</th>
+                <th>DateCreated</th>
+                <th>DateModified</th>
+                <th>CreatedBy</th>
+                <th>UpdatedBy</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for document in documents %}
+            <tr>
+                <td>{{ document.id }}</td>
+                <td>{{ document.subject }}</td>
+                <td>{{ document.body }}</td>
+                <td>{{ document.yearCreated }}</td>
+                <td>{{ document.monthCreated }}</td>
+                <td>{{ document.dayCreated }}</td>
+                <td>{{ document.dateCreated ? document.dateCreated|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ document.dateModified ? document.dateModified|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ document.createdBy }}</td>
+                <td>{{ document.updatedBy }}</td>
+                <td>
+                    <a href="{{ path('document_show', {'id': document.id}) }}">show</a>
+                    <a href="{{ path('document_edit', {'id': document.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('document_new') }}">Create new</a>
+{% endblock %}

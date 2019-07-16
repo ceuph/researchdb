@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DocumentAuthor{% endblock %}
+
+{% block body %}
+    <h1>DocumentAuthor</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ document_author.id }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ document_author.lastName }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ document_author.firstName }}</td>
+            </tr>
+            <tr>
+                <th>MiddleName</th>
+                <td>{{ document_author.middleName }}</td>
+            </tr>
+            <tr>
+                <th>Mi</th>
+                <td>{{ document_author.mi }}</td>
+            </tr>
+            <tr>
+                <th>Prefix</th>
+                <td>{{ document_author.prefix }}</td>
+            </tr>
+            <tr>
+                <th>Suffix</th>
+                <td>{{ document_author.suffix }}</td>
+            </tr>
+            <tr>
+                <th>DisplayName</th>
+                <td>{{ document_author.displayName }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('document_author_index') }}">back to list</a>
+
+    <a href="{{ path('document_author_edit', {'id': document_author.id}) }}">edit</a>
+
+    {{ include('document_author/_delete_form.html.twig') }}
+{% endblock %}

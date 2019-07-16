@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DocumentProperty index{% endblock %}
+
+{% block body %}
+    <h1>DocumentProperty index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Value</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for document_property in document_properties %}
+            <tr>
+                <td>{{ document_property.id }}</td>
+                <td>{{ document_property.name }}</td>
+                <td>{{ document_property.type }}</td>
+                <td>{{ document_property.value }}</td>
+                <td>
+                    <a href="{{ path('document_property_show', {'id': document_property.id}) }}">show</a>
+                    <a href="{{ path('document_property_edit', {'id': document_property.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('document_property_new') }}">Create new</a>
+{% endblock %}

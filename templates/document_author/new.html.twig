@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New DocumentAuthor{% endblock %}
+
+{% block body %}
+    <h1>Create new DocumentAuthor</h1>
+
+    {{ include('document_author/_form.html.twig') }}
+
+    <a href="{{ path('document_author_index') }}">back to list</a>
+{% endblock %}

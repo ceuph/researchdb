@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DocumentAuthor index{% endblock %}
+
+{% block body %}
+    <h1>DocumentAuthor index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>LastName</th>
+                <th>FirstName</th>
+                <th>MiddleName</th>
+                <th>Mi</th>
+                <th>Prefix</th>
+                <th>Suffix</th>
+                <th>DisplayName</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for document_author in document_authors %}
+            <tr>
+                <td>{{ document_author.id }}</td>
+                <td>{{ document_author.lastName }}</td>
+                <td>{{ document_author.firstName }}</td>
+                <td>{{ document_author.middleName }}</td>
+                <td>{{ document_author.mi }}</td>
+                <td>{{ document_author.prefix }}</td>
+                <td>{{ document_author.suffix }}</td>
+                <td>{{ document_author.displayName }}</td>
+                <td>
+                    <a href="{{ path('document_author_show', {'id': document_author.id}) }}">show</a>
+                    <a href="{{ path('document_author_edit', {'id': document_author.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('document_author_new') }}">Create new</a>
+{% endblock %}
