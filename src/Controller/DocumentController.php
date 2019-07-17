@@ -49,7 +49,7 @@ class DocumentController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="document_show", methods={"GET"})
+     * @Route("/{id}", name="document_show", methods={"GET"}, requirements={"id"="\d+"})
      */
     public function show(Document $document): Response
     {
