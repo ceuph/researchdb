@@ -3,18 +3,67 @@
 namespace App\Controller;
 
 use App\Entity\Document;
-use App\Form\Document1Type;
+use App\Entity\DocumentAttachment;
+use App\Form\DocumentType;
 use App\Repository\DocumentRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 /**
  * @Route("/document")
  */
 class DocumentController extends AbstractController
 {
+    public function moveUploadedFile($fileData) {
+        if ($fileData) {
+            $newFileName = uniqid().'.'.$fileData->guessExtension();
+            $fileData->move(
+                $this->getParameter('document_directory'),
+                $newFileName
+            );
+            return $newFileName;
+        }
+        return false;
+    }
+
+    public function persistAttachment(EntityManagerInterface $entityManager, FormInterface $form, Document $document)
+    {
+        $abstract = null;
+        $fulltext = null;
+        foreach ($document->getDocumentAttachments() as $attachment) {
+            switch ($attachment->getType()) {
+                case DocumentAttachment::TYPE_ABSTRACT:
+                    $abstract = $attachment;
+                    break;
+                case DocumentAttachment::TYPE_FULLTEXT:
+                    $fulltext = $attachment;
+                    break;
+            }
+        }
+        if ($abstractFile = $this->moveUploadedFile($form['abstract']->getData())) {
+            if (null === $abstract) {
+                $abstract = new DocumentAttachment();
+            }
+            $abstract->setType(DocumentAttachment::TYPE_ABSTRACT);
+            $abstract->setPath($abstractFile);
+            $document->addDocumentAttachment($abstract);
+            $entityManager->persist($abstract);
+        }
+        if ($fulltextFile = $this->moveUploadedFile($form['fulltext']->getData())) {
+            if (null === $fulltext) {
+                $fulltext = new DocumentAttachment();
+            }
+            $fulltext->setType(DocumentAttachment::TYPE_FULLTEXT);
+            $fulltext->setPath($fulltextFile);
+            $document->addDocumentAttachment($fulltext);
+            $entityManager->persist($fulltext);
+        }
+    }
     /**
      * @Route("/", name="document_index", methods={"GET"})
      */
@@ -31,11 +80,12 @@ class DocumentController extends AbstractController
     public function new(Request $request): Response
     {
         $document = new Document();
-        $form = $this->createForm(Document1Type::class, $document);
+        $form = $this->createForm(DocumentType::class, $document);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $this->persistAttachment($entityManager, $form, $document);
             $entityManager->persist($document);
             $entityManager->flush();
 
@@ -63,11 +113,13 @@ class DocumentController extends AbstractController
      */
     public function edit(Request $request, Document $document): Response
     {
-        $form = $this->createForm(Document1Type::class, $document);
+        $form = $this->createForm(DocumentType::class, $document);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $this->persistAttachment($entityManager, $form, $document);
+            $entityManager->flush();
 
             return $this->redirectToRoute('document_index');
         }

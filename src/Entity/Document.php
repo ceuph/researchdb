@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DocumentRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Document
 {
@@ -73,15 +74,46 @@ class Document
      */
     private $documentProperties;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $abstractFile;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\DocumentAttachment", mappedBy="document", orphanRemoval=true)
+     */
+    private $documentAttachments;
+
     public function __construct()
     {
         $this->documentAuthors = new ArrayCollection();
         $this->documentProperties = new ArrayCollection();
+        $this->documentAttachments = new ArrayCollection();
     }
 
     public function __toString()
     {
         return $this->getSubject();
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        $this->setDateCreated(new \DateTime());
+        $this->setDateModified(new \DateTime());
+        $this->setCreatedBy('none');
+        $this->setUpdatedBy('none');
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        $this->setDateModified(new \DateTime());
+        $this->setUpdatedBy('none');
     }
 
     public function getId(): ?int
@@ -253,6 +285,49 @@ class Document
             // set the owning side to null (unless already changed)
             if ($documentProperty->getDocument() === $this) {
                 $documentProperty->setDocument(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAbstractFile(): ?string
+    {
+        return $this->abstractFile;
+    }
+
+    public function setAbstractFile(?string $abstractFile): self
+    {
+        $this->abstractFile = $abstractFile;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DocumentAttachment[]
+     */
+    public function getDocumentAttachments(): Collection
+    {
+        return $this->documentAttachments;
+    }
+
+    public function addDocumentAttachment(DocumentAttachment $documentAttachment): self
+    {
+        if (!$this->documentAttachments->contains($documentAttachment)) {
+            $this->documentAttachments[] = $documentAttachment;
+            $documentAttachment->setDocument($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDocumentAttachment(DocumentAttachment $documentAttachment): self
+    {
+        if ($this->documentAttachments->contains($documentAttachment)) {
+            $this->documentAttachments->removeElement($documentAttachment);
+            // set the owning side to null (unless already changed)
+            if ($documentAttachment->getDocument() === $this) {
+                $documentAttachment->setDocument(null);
             }
         }
 

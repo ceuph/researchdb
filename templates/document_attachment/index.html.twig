@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DocumentAttachment index{% endblock %}
+
+{% block body %}
+    <h1>DocumentAttachment index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Path</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for document_attachment in document_attachments %}
+            <tr>
+                <td>{{ document_attachment.id }}</td>
+                <td>{{ document_attachment.type }}</td>
+                <td>{{ document_attachment.path }}</td>
+                <td>
+                    <a href="{{ path('document_attachment_show', {'id': document_attachment.id}) }}">show</a>
+                    <a href="{{ path('document_attachment_edit', {'id': document_attachment.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('document_attachment_new') }}">Create new</a>
+{% endblock %}

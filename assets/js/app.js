@@ -6,6 +6,7 @@
  */
 
 // any CSS you require will output into a single css file (app.css in this case)
+require('../images/logo.png');
 require('../css/app.css');
 require('../css/global.scss');
 
