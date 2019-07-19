@@ -84,6 +84,11 @@ class Document
      */
     private $documentAttachments;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $remarks;
+
     public function __construct()
     {
         $this->documentAuthors = new ArrayCollection();
@@ -330,6 +335,18 @@ class Document
                 $documentAttachment->setDocument(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRemarks(): ?string
+    {
+        return $this->remarks;
+    }
+
+    public function setRemarks(?string $remarks): self
+    {
+        $this->remarks = $remarks;
 
         return $this;
     }
