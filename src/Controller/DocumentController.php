@@ -103,8 +103,22 @@ class DocumentController extends AbstractController
      */
     public function show(Document $document): Response
     {
+        $abstract = null;
+        $fulltext = null;
+        foreach ($document->getDocumentAttachments() as $attachment) {
+            switch ($attachment->getType()) {
+                case DocumentAttachment::TYPE_ABSTRACT:
+                    $abstract = $attachment;
+                    break;
+                case DocumentAttachment::TYPE_FULLTEXT:
+                    $fulltext = $attachment;
+                    break;
+            }
+        }
         return $this->render('document/show.html.twig', [
             'document' => $document,
+            'abstract' => $abstract,
+            'fulltext' => $fulltext
         ]);
     }
 

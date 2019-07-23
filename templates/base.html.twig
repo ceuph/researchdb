@@ -24,14 +24,15 @@
                         <li class="nav-item{{ app.request.get('_route') == 'advanced' ? ' active' }}">
                             <a class="nav-link" href="{{ url('advanced') }}">Advanced Search</a>
                         </li>
-                        <li class="nav-item{{ app.request.get('_route') == 'browse' ? ' active' }}">
-                            <a class="nav-link" href="{{ url('browse') }}">Browse</a>
+                        <li class="nav-item{{ app.request.get('_route') == 'document_index' ? ' active' }}">
+                            <a class="nav-link" href="{{ url('document_index') }}">Browse</a>
                         </li>
                     </ul>
                 </div>
             </nav>
         </div>
-        <div class="container">
+
+        <div id="content" class="container">
             {% block body %}{% endblock %}
         </div>
         {% block javascripts %}

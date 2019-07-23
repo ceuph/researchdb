@@ -57,6 +57,11 @@ class DocumentAuthor
      */
     private $document;
 
+    public function __toString()
+    {
+        return $this->getDisplayName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

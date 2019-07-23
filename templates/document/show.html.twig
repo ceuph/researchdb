@@ -1,22 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Document{% endblock %}
+{% block title %}{{ document.subject }}{% endblock %}
 
 {% block body %}
-    <h1>{{ document.subject }}</h1>
+    <h4>{{ document.subject }}</h4>
+    <p>{{ document.documentAuthors|join('; ') }}, {{ document.yearCreated }}</p>
 
-    <p>{{ document.body }}</p>
+    {% if abstract is empty %}
+        <p>{{ document.body }}</p>
+    {% else %}
+        <embed src="{{ asset(document_path ~ '/' ~ abstract.path) }}" type="application/pdf" width="100%" height="1000px">
+    {% endif %}
 
-    <h4>Attachments</h4>
-    <ul>
-        {% for attachment in document.documentAttachments %}
-            <li><a href="{{ asset(document_path ~ '/' ~ attachment.path) }}">{{ attachment.type|capitalize }}</a></li>
-        {% endfor %}
-    </ul>
-
+    {#
     <a href="{{ path('document_index') }}">back to list</a>
 
     <a href="{{ path('document_edit', {'id': document.id}) }}">edit</a>
 
     {{ include('document/_delete_form.html.twig') }}
+    #}
 {% endblock %}

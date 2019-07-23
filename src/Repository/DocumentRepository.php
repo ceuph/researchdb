@@ -19,6 +19,17 @@ class DocumentRepository extends ServiceEntityRepository
         parent::__construct($registry, Document::class);
     }
 
+    public function findByKeywords($keywords)
+    {
+        $params = explode(' ', trim($keywords));
+        $qb = $this->createQueryBuilder('doc');
+        foreach ($params as $param) {
+            $qb->orWhere($qb->expr()->like('doc.subject', $qb->expr()->literal("%$param%")));
+            $qb->orWhere($qb->expr()->like('doc.body', $qb->expr()->literal("%$param%")));
+        }
+        return $qb->getQuery()->execute();
+    }
+
     // /**
     //  * @return Document[] Returns an array of Document objects
     //  */

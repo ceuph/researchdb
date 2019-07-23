@@ -13,12 +13,10 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use App\Entity\Document;
 use App\Entity\DocumentAttachment;
 use App\Entity\DocumentAuthor;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ImportDataCommand extends Command
 {
     protected static $defaultName = 'app:import-data';
-    private $container;
     private $entityManager;
 
     public function __construct(?string $name = null, EntityManagerInterface $entityManager)
