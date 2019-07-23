@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NatProd Research Database{% endblock %}
+
+{% block body %}
+    {{ include('default/_advancedSearchForm.html.twig') }}
+    {% if documents is not empty %}
+        {{ include('default/_searchExternal.html.twig') }}
+        {{ include('default/_searchResults.html.twig') }}
+    {% endif %}
+{% endblock %}

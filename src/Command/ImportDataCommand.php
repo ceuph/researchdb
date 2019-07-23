@@ -2,7 +2,10 @@
 
 namespace App\Command;
 
+use App\Entity\DocumentProperty;
+use App\Form\DocumentType;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpParser\Comment\Doc;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -56,6 +59,18 @@ class ImportDataCommand extends Command
             $remarks = $spreadsheet->getActiveSheet()->getCell('G' . $x)->getValue();
             $abstract = $spreadsheet->getActiveSheet()->getCell('H' . $x)->getValue();
             $fulltext = $spreadsheet->getActiveSheet()->getCell('I' . $x)->getValue();
+            $conference = $spreadsheet->getActiveSheet()->getCell('J' . $x)->getValue();
+            $presentation = $spreadsheet->getActiveSheet()->getCell('K' . $x)->getValue();
+            $publication = $spreadsheet->getActiveSheet()->getCell('L' . $x)->getValue();
+            $exhibition = $spreadsheet->getActiveSheet()->getCell('M' . $x)->getValue();
+            $international = $spreadsheet->getActiveSheet()->getCell('N' . $x)->getValue();
+            $patent = $spreadsheet->getActiveSheet()->getCell('O' . $x)->getValue();
+            $location = $spreadsheet->getActiveSheet()->getCell('P' . $x)->getValue();
+            $schoolyear = $spreadsheet->getActiveSheet()->getCell('Q' . $x)->getValue();
+            $award = $spreadsheet->getActiveSheet()->getCell('R' . $x)->getValue();
+            $awardbody = $spreadsheet->getActiveSheet()->getCell('S' . $x)->getValue();
+            $natprod = $spreadsheet->getActiveSheet()->getCell('T' . $x)->getValue();
+
 
             if (strlen(trim($subject)) == 0) {
                 break;
@@ -90,6 +105,20 @@ class ImportDataCommand extends Command
                     $this->entityManager->persist($documentAuthor);
                 }
             }
+
+            $this->addProperty($document, DocumentProperty::PROPERTY_CONFERENCE, DocumentProperty::TYPE_TEXT, $conference);
+            $this->addProperty($document, DocumentProperty::PROPERTY_PRESENTATION, DocumentProperty::TYPE_TEXT, $presentation);
+            $this->addProperty($document, DocumentProperty::PROPERTY_PUBLICATION, DocumentProperty::TYPE_TEXT, $publication);
+            $this->addProperty($document, DocumentProperty::PROPERTY_EXHIBITION, DocumentProperty::TYPE_TEXT, $exhibition);
+            $this->addProperty($document, DocumentProperty::PROPERTY_INTERNATIONAL, DocumentProperty::TYPE_BOOL, $international);
+            $this->addProperty($document, DocumentProperty::PROPERTY_PATENT, DocumentProperty::TYPE_NUMBER, $patent);
+            $this->addProperty($document, DocumentProperty::PROPERTY_LOCATION, DocumentProperty::TYPE_TEXT, $location);
+            $this->addProperty($document, DocumentProperty::PROPERTY_SCHOOL_YEAR, DocumentProperty::TYPE_TEXT, $schoolyear);
+            $this->addProperty($document, DocumentProperty::PROPERTY_AWARD, DocumentProperty::TYPE_TEXT, $award);
+            $this->addProperty($document, DocumentProperty::PROPERTY_AWARD_BODY, DocumentProperty::TYPE_TEXT, $awardbody);
+            $this->addProperty($document, DocumentProperty::PROPERTY_NATPROD, DocumentProperty::TYPE_TEXT, $natprod);
+
+
             $this->entityManager->persist($document);
             $x++;
         }
@@ -107,6 +136,18 @@ class ImportDataCommand extends Command
             $documentAttachment->setType($type);
             $document->addDocumentAttachment($documentAttachment);
             $this->entityManager->persist($documentAttachment);
+        }
+    }
+
+    private function addProperty(Document $document, $property, $type, $value)
+    {
+        if (strlen(trim($value)) > 0) {
+            $documentProperty = new DocumentProperty();
+            $documentProperty->setName($property);
+            $documentProperty->setType($type);
+            $documentProperty->setValue($value);
+            $document->addDocumentProperty($documentProperty);
+            $this->entityManager->persist($documentProperty);
         }
     }
 }
