@@ -78,6 +78,9 @@ class DefaultController extends AbstractController
         foreach ($scalars as $scalar) {
             $docRepo = $this->getDoctrine()->getRepository(Document::class);
             $year = $scalar['yearCreated'];
+            if ($year <= 0) {
+                continue;
+            }
             $years[$year] = $year;
 
             $total[$year] = $docRepo->countByYear($year);

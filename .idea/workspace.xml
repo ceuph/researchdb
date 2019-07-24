@@ -3,15 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c73bfb03-94ae-4766-bb16-071171e440f0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Command/ImportDataCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command/ImportDataCommand.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/DocumentProperty.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/DocumentProperty.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/AdvancedSearchType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/AdvancedSearchType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/DocumentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/DocumentRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/default/_advancedSearchForm.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/_advancedSearchForm.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/default/_searchExternal.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/_searchExternal.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/default/_searchResults.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/_searchResults.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/document/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/document/show.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,7 +17,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ImportDataCommand.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ImportDataCommand.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Command/ImportDataCommand.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
@@ -41,7 +33,16 @@
         <entry file="file://$PROJECT_DIR$/src/Entity/DocumentProperty.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
-              <caret line="23" column="31" lean-forward="true" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+              <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/DefaultController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="199">
+              <caret line="81" column="25" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -59,6 +60,7 @@
       <find>chart</find>
       <find>Chart</find>
       <find>intern</find>
+      <find>anal</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -102,10 +104,10 @@
         <option value="$PROJECT_DIR$/templates/default/_searchResults.html.twig" />
         <option value="$PROJECT_DIR$/templates/default/_advancedSearchForm.html.twig" />
         <option value="$PROJECT_DIR$/src/Form/AdvancedSearchType.php" />
-        <option value="$PROJECT_DIR$/src/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/Repository/DocumentRepository.php" />
         <option value="$PROJECT_DIR$/src/Entity/DocumentProperty.php" />
         <option value="$PROJECT_DIR$/src/Command/ImportDataCommand.php" />
+        <option value="$PROJECT_DIR$/src/Controller/DefaultController.php" />
       </list>
     </option>
   </component>
@@ -387,12 +389,12 @@
       <workItem from="1563885906666" duration="38000" />
       <workItem from="1563886107043" duration="22641000" />
       <workItem from="1563926649926" duration="600000" />
-      <workItem from="1563927892936" duration="3473000" />
+      <workItem from="1563927892936" duration="3835000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87938000" />
+    <option name="totallyTimeSpent" value="88300000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="71" y="-7" width="1472" height="878" extended-state="6" />
@@ -716,13 +718,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/DefaultController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="47" column="157" selection-start-line="47" selection-start-column="157" selection-end-line="47" selection-end-column="157" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/AdvancedSearchType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-136">
@@ -743,7 +738,7 @@
     <entry file="file://$PROJECT_DIR$/src/Entity/DocumentProperty.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="23" column="31" lean-forward="true" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+          <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -754,6 +749,13 @@
           <folding>
             <element signature="e#31#63#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/DefaultController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="81" column="25" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
         </state>
       </provider>
     </entry>
