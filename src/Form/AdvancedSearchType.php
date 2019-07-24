@@ -17,15 +17,20 @@ class AdvancedSearchType extends AbstractType
         $builder
             ->add('type', ChoiceType::class, [
                 'choices' => [
+                    'Any' => null,
                     'Natural Products' => DocumentProperty::PROPERTY_NATPROD,
                     'School Year' => DocumentProperty::PROPERTY_SCHOOL_YEAR,
                     'International' => DocumentProperty::PROPERTY_INTERNATIONAL,
                     'Publication' => DocumentProperty::PROPERTY_PUBLICATION,
                     'Awards' => DocumentProperty::PROPERTY_AWARD,
-                    'Presentation' => DocumentProperty::PROPERTY_PRESENTATION
+                    'Presentation' => DocumentProperty::PROPERTY_PRESENTATION,
+                    'Patent' => DocumentProperty::PROPERTY_PATENT,
                 ]
             ])
             ->add('parameter', TextType::class, [
+                'required' => false
+            ])
+            ->add('authors', TextType::class, [
                 'required' => false
             ])
             ->add('search', TextType::class, [

@@ -45,7 +45,7 @@ class DefaultController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $documents = $this->getDoctrine()->getRepository(Document::class)->findByKeywords($data['search'],$data['type'],$data['parameter']);
+            $documents = $this->getDoctrine()->getRepository(Document::class)->findByKeywords($data['search'],$data['type'],$data['parameter'],$data['authors']);
         }
 
         return $this->render('default/advanced.html.twig', [

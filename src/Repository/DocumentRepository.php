@@ -19,7 +19,7 @@ class DocumentRepository extends ServiceEntityRepository
         parent::__construct($registry, Document::class);
     }
 
-    public function findByKeywords($keywords, $property = null, $value = '')
+    public function findByKeywords($keywords, $property = null, $value = '', $authors = '')
     {
         $params = explode(' ', trim($keywords));
         $qb = $this->createQueryBuilder('doc');
@@ -29,9 +29,22 @@ class DocumentRepository extends ServiceEntityRepository
             $qb->andWhere($qb->expr()->like('prop.value', $qb->expr()->literal("%$value%")));
             $qb->setParameter('prop', $property);
         }
+        if (strlen(trim($authors)) > 0) {
+            $qb->innerJoin('doc.documentAuthors', 'author');
+            $authors = explode(';', $authors);
+            foreach ($authors as $author) {
+                $details = explode(' ', $author);
+                foreach ($details as $detail) {
+                    if (strlen(trim($detail)))
+                        $qb->orWhere($qb->expr()->like('author.displayName', $qb->expr()->literal("%$detail%")));
+                }
+            }
+        }
         foreach ($params as $param) {
-            $qb->andWhere($qb->expr()->like('doc.subject', $qb->expr()->literal("%$param%")));
-            $qb->andWhere($qb->expr()->like('doc.body', $qb->expr()->literal("%$param%")));
+            if (strlen(trim($param))) {
+                $qb->orWhere($qb->expr()->like('doc.subject', $qb->expr()->literal("%$param%")));
+                $qb->orWhere($qb->expr()->like('doc.body', $qb->expr()->literal("%$param%")));
+            }
         }
         return $qb->getQuery()->execute();
     }

@@ -69,7 +69,9 @@ class ImportDataCommand extends Command
             $schoolyear = $spreadsheet->getActiveSheet()->getCell('Q' . $x)->getValue();
             $award = $spreadsheet->getActiveSheet()->getCell('R' . $x)->getValue();
             $awardbody = $spreadsheet->getActiveSheet()->getCell('S' . $x)->getValue();
-            $natprod = $spreadsheet->getActiveSheet()->getCell('T' . $x)->getValue();
+            $citation = $spreadsheet->getActiveSheet()->getCell('T' . $x)->getValue();
+            $natprod = $spreadsheet->getActiveSheet()->getCell('U' . $x)->getValue();
+            $schoolcollege = $spreadsheet->getActiveSheet()->getCell('V' . $x)->getValue();
 
 
             if (strlen(trim($subject)) == 0) {
@@ -116,7 +118,9 @@ class ImportDataCommand extends Command
             $this->addProperty($document, DocumentProperty::PROPERTY_SCHOOL_YEAR, DocumentProperty::TYPE_TEXT, $schoolyear);
             $this->addProperty($document, DocumentProperty::PROPERTY_AWARD, DocumentProperty::TYPE_TEXT, $award);
             $this->addProperty($document, DocumentProperty::PROPERTY_AWARD_BODY, DocumentProperty::TYPE_TEXT, $awardbody);
+            $this->addProperty($document, DocumentProperty::PROPERTY_CITATIONS, DocumentProperty::TYPE_TEXT, $citation);
             $this->addProperty($document, DocumentProperty::PROPERTY_NATPROD, DocumentProperty::TYPE_TEXT, $natprod);
+            $this->addProperty($document, DocumentProperty::PROPERTY_SCHOOL_COLLEGE, DocumentProperty::TYPE_TEXT, $schoolcollege);
 
 
             $this->entityManager->persist($document);

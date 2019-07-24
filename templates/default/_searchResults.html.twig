@@ -2,13 +2,19 @@
 {% for document in documents %}
     <div class="row">
         <div class="col-lg-12">
-            <h5><a href="{{ path('document_show', {'id': document.id}) }}">{{ document.subject|wordwrap(30) }}</a></h5>
+            <h5>
+                <a href="{{ path('document_show', {'id': document.id}) }}">{{ document.subject }}</a>
+            </h5>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
             <p>{{ document.documentAuthors|join('; ') }},&nbsp;{{ document.yearCreated }}</p>
-            <p>{{ document.body }}</p>
+            <p>{{ document.body|wordwrap(50) }}</p>
+            <p>
+                <a href="https://scholar.google.com.ph/scholar?q={{ document.subject }}" class="btn btn-secondary" style="font-size: 12px;">Google Scholars</a>
+                <a href="https://www.researchgate.net/search?q={{ document.subject }}" class="btn btn-secondary" style="font-size: 12px;">Research Gate</a>
+            </p>
             <hr>
         </div>
     </div>

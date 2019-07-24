@@ -19,7 +19,9 @@ class DocumentProperty
     const PROPERTY_SCHOOL_YEAR = 'SCHOOL_YEAR';
     const PROPERTY_AWARD = 'AWARD';
     const PROPERTY_AWARD_BODY = 'AWARD_BODY';
+    const PROPERTY_CITATIONS = 'CITATIONS';
     const PROPERTY_NATPROD = 'NATPROD';
+    const PROPERTY_SCHOOL_COLLEGE = 'SCHOOL_COLLEGE';
     const TYPE_TEXT = 'TEXT';
     const TYPE_NUMBER = 'NUMBER';
     const TYPE_BOOL = 'BOOL';
@@ -42,7 +44,7 @@ class DocumentProperty
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $value;
 
