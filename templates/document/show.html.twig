@@ -3,7 +3,9 @@
 {% block title %}{{ document.subject }}{% endblock %}
 
 {% block body %}
-    <h4>{{ document.subject }}</h4>
+    <h4>
+        {{ document.subject }}
+    </h4>
     <p>{{ document.documentAuthors|join('; ') }}, {{ document.yearCreated }}</p>
 
     {% if abstract is empty %}
@@ -11,6 +13,17 @@
     {% else %}
         <embed src="{{ asset(document_path ~ '/' ~ abstract.path) }}" type="application/pdf" width="100%" height="1000px">
     {% endif %}
+
+    <ul>
+        {% for prop in document.documentProperties %}
+            <li><strong>{{ prop.name }}:</strong> {{ prop.value }}</li>
+        {% endfor %}
+    </ul>
+
+    <p>
+        <a href="https://scholar.google.com.ph/scholar?q={{ document.subject }}" class="btn btn-secondary">Google Scholars</a>
+        <a href="https://www.researchgate.net/search?q={{ document.subject }}" class="btn btn-secondary">Research Gate</a>
+    </p>
 
     {#
     <a href="{{ path('document_index') }}">back to list</a>

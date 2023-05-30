@@ -3,9 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+        {{ encore_entry_link_tags('app') }}
+        {% block stylesheets %}{% endblock %}
     </head>
     <body>
         <div class="container">
@@ -27,6 +26,9 @@
                         <li class="nav-item{{ app.request.get('_route') == 'document_index' ? ' active' }}">
                             <a class="nav-link" href="{{ url('document_index') }}">Browse</a>
                         </li>
+                        <li class="nav-item{{ app.request.get('_route') == 'analytics' ? ' active' }}">
+                            <a class="nav-link" href="{{ url('analytics') }}">Analytics</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -35,8 +37,7 @@
         <div id="content" class="container">
             {% block body %}{% endblock %}
         </div>
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        {{ encore_entry_script_tags('app') }}
+        {% block javascripts %}{% endblock %}
     </body>
 </html>

@@ -5,6 +5,7 @@
 {% block body %}
     {{ include('default/_searchForm.html.twig') }}
     {% if documents is not empty %}
+        {{ include('default/_searchExternal.html.twig') }}
         {{ include('default/_searchResults.html.twig') }}
     {% endif %}
 {% endblock %}

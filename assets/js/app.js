@@ -13,6 +13,7 @@ require('../css/global.scss');
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
 const $ = require('jquery');
 require('bootstrap');
+require('chart.js');
 
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();

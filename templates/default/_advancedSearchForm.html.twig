@@ -1,0 +1,7 @@
+{{ form_start(form) }}
+    {{ form_row(form.type) }}
+    {{ form_row(form.parameter) }}
+    {{ form_row(form.authors) }}
+    {{ form_row(form.search) }}
+    <button class="btn">{{ button_label|default('Submit') }}</button>
+{{ form_end(form) }}
